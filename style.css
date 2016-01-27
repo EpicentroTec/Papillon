@@ -180,7 +180,7 @@ a:hover {
   top: 0;
   transition: left .5s, top .5s, height .5s, padding .5s, overflow-y .5s;
   width: 100%;
-  z-index: 999;
+  z-index: 9999;
 }
 .header .menu.fixo .logo {
   background-color: transparent;
@@ -890,6 +890,9 @@ a:hover {
   font-size: 1.2em;
   text-shadow: none;
 }
+.footer .navbar .item a .fa.instagram {
+  margin-right: 3px;
+}
 .footer .navbar.bottom {
   bottom: 0;
   left: 0;
@@ -990,7 +993,7 @@ a:hover {
     margin-bottom: 30px;
     text-align: center;
     display: inline;
-  } 
+  }
   .page .video .titulo,
   .page .galeria .titulo {
     display: block;

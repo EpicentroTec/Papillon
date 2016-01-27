@@ -17,11 +17,11 @@
     <meta name="description" content="Papillon Buffet e Eventos - Casamento na praia, formaturas, eventos em geral - Ubatuba, SP">
     <meta name="robots" content="index,follow">
     <meta name="keywords" content="Papillon,">
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="imagens/favicon.ico" >
-    
+
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="assets/scripts/jquery.cycle2.min.js"></script>
     <script src="assets/scripts/jquery.cycle2.center.min.js"></script>
@@ -80,10 +80,11 @@
       <div class="wrap wrap-social">
         <ul class="social-bar">
           <li><a href="http://www.facebook.com/profile.php?id=1746417399#!/profile.php?id=1746417399"><img src="assets/img/i-facebook.png" alt="ícone Facebook"></a></li>
+          <li><a href="#"><img src="assets/img/i-instagram.png" alt="ícone Instagram"></a></li>
           <li><a href="http://twitter.com/#!/papillonbuffet"><img src="assets/img/i-twitter.png" alt="ícone Twitter"></a></li>
           <li><a href="http://www.flickr.com/photos/31374899@N03/5110850805/"><img src="assets/img/i-flickr.png" alt="ícone Flickr"></a></li>
           <li><a href="http://casamentonapraiapapillon.blogspot.com/"><img src="assets/img/i-blogger.png" alt="ícone Blogger"></a></li>
-          <li class="english"><span class="text"> 
+          <li class="english"><span class="text">
           <?php
             if (isset($_SESSION['i']))
               echo "<a href=\".\"><img src=\"assets/img/i-portugues.png\" alt=\"ícone Português\"> Português</a>";
@@ -100,7 +101,7 @@
             <a href="."><img src="assets/img/logo.png" alt="Logo"></a>
           </div>
           <ul>
-          <?php 
+          <?php
           if (!isset($_SESSION['i'])) {
             ?>
             <li class="menu-icon"><i class="fa fa-bars"></i></li>
@@ -134,10 +135,10 @@
       <section id="locacao" class="locacao">
         <div class="wrap">
           <h1 class="hidden">Locação de materiais</h1>
-          <p>Veja também: 
-          <a href="?pag=124">Locação de materiais</a> | 
+          <p>Veja também:
+          <a href="?pag=124">Locação de materiais</a> |
           <a href="?pag=noivos">Página dos noivos</a></p>
-          
+
         </div>
       </section>
       <section id="conteudo"></section>
@@ -150,10 +151,10 @@
           <?php
             $sql = "SELECT * FROM pagina WHERE id = 1;";
             $res = mysql_query($sql,$con) or die ("Erro: " . $sql . "<br />" . mysql_error($con));
-              
+
             $txt = mysql_fetch_array($res);
             $num = mysql_num_rows($res);
-            
+
             $texto = str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $txt['texto']);
             $bloco = explode("<!-- -->", $texto);
           ?>
@@ -209,10 +210,10 @@
             <?php
             $sql = "SELECT * FROM pagina WHERE id = 3;";
             $res = mysql_query($sql,$con) or die ("Erro: " . $sql . "<br />" . mysql_error($con));
-              
+
             $txt = mysql_fetch_array($res);
             $num = mysql_num_rows($res);
-            
+
             $texto = str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $txt['texto']);
             $bloco = explode("<!-- -->", $texto);
 
@@ -311,7 +312,7 @@
               <?php
                 $sql = "SELECT * FROM pagina p WHERE tipo=2 ORDER BY data DESC LIMIT 3;";
                 $res = mysql_query($sql,$con) or die ("Erro: " . $sql . "<br />" . mysql_error($con));
-                  
+
                 while ($dep = mysql_fetch_array($res)) {
                 ?>
                   <div class="depo-box">
@@ -334,9 +335,9 @@
                     <p>
                     <?php
                       if (strlen($dep['texto']) < 400)
-                        echo str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $dep['texto']); 
+                        echo str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $dep['texto']);
                       else {
-                        echo substr(str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $dep['texto']),0,400) . "..."; 
+                        echo substr(str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $dep['texto']),0,400) . "...";
                         echo "<a href=\"?pag=" . $dep['id'] . "\">Leia mais</a>";
                       }
                     ?>
@@ -349,7 +350,7 @@
             </div>
           </section>
           <?php
-        }  
+        }
         ?>
         <section id="orcamento" class="orcamento">
           <div class="wrap">
@@ -437,7 +438,7 @@
       }
       else
         include ("pagina-interna.php");
-       
+
       mysql_close($con);
       ?>
     </main>
@@ -452,9 +453,10 @@
               <strong>Redes sociais:</strong>
               <a href="http://www.facebook.com/profile.php?id=1746417399#!/profile.php?id=1746417399"><i class="fa fa-facebook-square"></i></a>
               <a href="http://twitter.com/#!/papillonbuffet"><i class="fa fa-twitter-square"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
               <a href="http://www.flickr.com/photos/31374899@N03/5110850805/"><i class="fa fa-flickr"></i></a>
               <a href="http://casamentonapraiapapillon.blogspot.com/"><img class="fa" src="assets/img/i-blog.png" alt="Ícone do blog da Papillon"></a>
-              
+
             </span>
             <p align="center">
             Entre em contato ou solicite um orçamento online. <a href=".#orcamento">Clique aqui</a>!

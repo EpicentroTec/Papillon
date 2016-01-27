@@ -66,6 +66,7 @@
 body {
   background-color: #fff;
   font: 18px 'Roboto', serif;
+  height: 2000px;
 }
 
 img {
@@ -195,7 +196,7 @@ a:hover {
   display: none;
 }
 .header .menu.fixo li {
-  padding: 5px 15px;
+  padding: 5px 10px;
 }
 .header .menu.fixo li a {
   font-size: 1.3em;
@@ -205,7 +206,7 @@ a:hover {
 }
 .header .menu ul li {
   font: 1em 'Roboto';
-  padding: 15px;
+  padding: 10px;
 }
 .header .logo {
   background-color: white;
@@ -338,7 +339,7 @@ a:hover {
     display: none;
   }
   .header .menu li a {
-    font: 1.5em 'Damion';
+    font: 1.2em 'Damion';
     font-weight: normal;
     text-shadow: 1px 1px 0 #fff;
   }
@@ -501,6 +502,15 @@ a:hover {
   }
   .quemsomos .labels .label.custo-beneficio::before {
     content: '\f0d6';
+  }
+  .quemsomos .labels .label.atendimento {
+    background-color: #777777;
+  }
+  .quemsomos .labels .label.atendimento.active {
+    background-color: #888888;
+  }
+  .quemsomos .labels .label.atendimento::before {
+    content: '\f098';
   }
 }
 .servicos {
@@ -727,6 +737,24 @@ a:hover {
   text-align: center;
   width: calc(100% / 3);
 }
+.depoimentos .depo-menu {
+  position: absolute;
+  float: right;
+  top: 100%;
+  left: 100%;
+  margin-left: -200px;
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  background-color: #ff8e00;
+  color: #fff;
+  font-family: 'Roboto Condensed';
+  font-size: 16pt;
+  cursor: pointer;
+  transition: height .5s, margin-top .5s;
+  border-radius: 5px 5px 0 0 ;
+  overflow: hidden;
+}
 .depoimentos .depo-box img {
   border-radius: 50%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -736,7 +764,7 @@ a:hover {
 .depoimentos .depo-box p {
   font-size: .9em;
   line-height: 1.5em;
-  text-align: justify;
+  text-align: left;
 }
 .depoimentos .depo-box p::before {
   content: '“';
@@ -871,6 +899,15 @@ a:hover {
   display: block;
   text-align: center;
 }
+.footer .contato a {
+  color: #aff;
+}
+.footer .contato p {
+  color: #fff;
+}
+.footer .contato a:hover {
+  text-decoration: underline;
+}
 
 @media screen and (max-width: 1023px) {
   .footer {
@@ -947,9 +984,13 @@ a:hover {
 @media screen and (min-width: 1024px) {
   .page .video,
   .page .galeria {
+    position: relative;
+    width: 300px;
+    top: 0;
     margin-bottom: 30px;
     text-align: center;
-  }
+    display: inline;
+  } 
   .page .video .titulo,
   .page .galeria .titulo {
     display: block;
@@ -960,12 +1001,26 @@ a:hover {
     width: calc(100% / 3);
   }
   .page .galerias {
+    position: relative;
+    background-color: #ccc;
+    width: 300px;
+    height: 480px;
+    top: -500px;
     text-align: center;
+    left: 50%;
+    margin-left: 180px;
+    overflow: auto;
+    border: 0px solid #000;
   }
   .page .galerias .galeria {
-    display: inline-block;
-    float: none;
     margin: 0 15px;
-    width: auto;
+  }
+  .page .foto_gde {
+    width: 1002px;
+    height: 520px;
+    border: 5px solid #ddd;
+    padding: 0 0 0 20px;
+    margin: 0;
+    background-color: #ddd;
   }
 }

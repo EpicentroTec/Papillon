@@ -347,6 +347,9 @@
                 <?php
                 }
               ?>
+              <div class="add-depo">
+                  <button class="btn enviar">Adicionar depoimento</button>
+              </div>
             </div>
           </section>
           <?php

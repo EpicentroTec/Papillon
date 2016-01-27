@@ -62,6 +62,15 @@ $(document).ready(function () {
     $('.content').removeClass('visible');
     $('.content.custo-beneficio').addClass('visible');
   });
+  
+  $('.label.atendimento').click(function() {
+
+    $('.label').removeClass('active');
+    $('.label.atendimento').addClass('active');
+
+    $('.content').removeClass('visible');
+    $('.content.atendimento').addClass('visible');
+  });
 });
 
 $(document).ready(function () {

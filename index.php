@@ -7,6 +7,7 @@
   }
   else
     session_destroy();
+  $lang = $_SESSION['i'] == 1? 2 : 1;
 ?>
 <html>
   <head>
@@ -52,7 +53,7 @@
   </head>
   <body class="resolucao">
     <header id="header" class="header">
-      <h1 class="hidden">Papillon Eventos</h1>
+      <h1 class="hidden">Papillon Buffet e Eventos</h1>
       <div class="slider slideshow" data-cycle-center-horz="true" data-cycle-center-vert="true">
         <div class="cycle-pager"></div>
         <?php
@@ -100,6 +101,7 @@
             <a href="."><img src="assets/img/logo.png" alt="Logo"></a>
           </div>
           <ul>
+          
           <?php 
           if (!isset($_SESSION['i'])) {
             ?>
@@ -131,6 +133,9 @@
       </nav>
     </header>
     <main>
+      <?php
+      if ($lang == 1) {
+      ?>
       <section id="locacao" class="locacao">
         <div class="wrap">
           <h1 class="hidden">Locação de materiais</h1>
@@ -140,13 +145,26 @@
           
         </div>
       </section>
+      <?php
+      }
+      ?>
+      
       <section id="conteudo"></section>
       <?php
-      include ("conexao.php");
+      if ($lang == 1) {
+        $tit = array("Quem somos","Profissionalismo","Variedade","Custo-Benefício","Atendimento");
+        include ("conexao.php");
+      }
+      else {
+        $tit = array("Who we are","Professionalism","Variety","Cost-effectiveness","Customer service");
+        include ("conexao2.php");
+      }
+      
+      
       if (!isset($_GET['pag'])) {
         ?>
         <section id="quemsomos" class="quemsomos clearfix">
-          <h1 class="hidden">Quem Somos</h1>
+          <h1 class="hidden"><?= $tit[0]; ?></h1>
           <?php
             $sql = "SELECT * FROM pagina WHERE id = 1;";
             $res = mysql_query($sql,$con) or die ("Erro: " . $sql . "<br />" . mysql_error($con));
@@ -160,46 +178,46 @@
           <div class="wrap">
             <div class="painel clearfix">
               <div class="content experiencia visible">
-                <h2 class="title">Quem Somos</h2>
+                <h2 class="title"><?=$tit[0]; ?></h2>
                 <p class="text">
                 <!--Trabalhamos h&aacute; mais de dez anos com casamentos na praia, adquirindo neste per&iacute;odo experi&ecirc;ncia para prestar todos os servi&aacute;os com profissionalismo, oferecendo aos noivos seguran&ccedil;a em todo o planejamento do casamento. Temos servi&ccedil;o pr&oacute;prio de buffet, decora&ccedil;&atilde;o, bar de caipirinhas e espa&ccedil;os p&eacute; na areia. Para todos os outros como DJ, fotografia, filmagem, convites, temos parceria com profissionais da &aacute;rea. Desta forma, oferecemos praticidade aos noivos j&aacute; que, em sua maioria, s&atilde;o de fora da cidade.-->
                   <?= $bloco[0]; ?>
                 </p>
               </div>
               <div class="content profissionalismo">
-                <h2 class="title">Profissionalismo</h2>
+                <h2 class="title"><?=$tit[1]; ?></h2>
                 <p class="text">
                 <!--O Papillon Eventos trabalha com profissionalismo, dedica&ccedil;&atilde;o, al&eacute;m de ter muito prazer em poder realizar seus sonhos, projetos e ideias. Eventos sociais, cerim&ocirc;nias, festas, onde o calor do encontro familiar e afetivo se juntam. Trabalhamos junto a emo&ccedil;&otilde;es, que geram uma energia especial, energia esta que nos d&aacute; inspira&ccedil;&atilde;o para realizar cada vez melhor nosso trabalho.-->
                   <?= $bloco[1]; ?>
                 </p>
               </div>
               <div class="content variedade">
-                <h2 class="title">Variedade</h2>
+                <h2 class="title"><?=$tit[2]; ?></h2>
                 <p class="text">
                 <!--Al&eacute;m dos servi&ccedil; do segmento de festas, promovemos tamb&eacute;m eventos institucionais, servi&ccedil;os prestados &agrave;s empresas. Em todos os tipos de eventos, somos objetivos e pr&aacute;ticos, oferecendo ideias e solu&ccedil;&otilde;es para as mais variadas necessidades. Com card&aacute;pios diversificados e criativos nas op&ccedil;&otilde;es de <em>coffee break</em>, caf&eacute; da manh&atilde;, <em>happy hour</em>, <em>catering </em>ou qualquer outro tipo de recep&ccedil;&atilde;o.-->
                   <?= $bloco[2]; ?>
                 </p>
               </div>
               <div class="content custo-beneficio">
-                <h2 class="title">Custo-benefício</h2>
+                <h2 class="title"><?=$tit[3]; ?></h2>
                 <p class="text">
                 <!--Como oferecemos todos os servi&ccedil;os num pacote &uacute;nico e prestamos uma assessoria completa sem custo adicional o custo-benef&iacute;cio se torna muito vi&aacute;vel. Parcerias e indica&ccedil;&otilde;es de profissionais para os mais diversos servi&ccedil;os e produtos facilitam ainda mais a vida de nossos clientes, familiares e seus convidados.-->
                   <?= $bloco[3]; ?>
                 </p>
               </div>
               <div class="content atendimento">
-                <h2 class="title">Atendimento</h2>
+                <h2 class="title"><?=$tit[4]; ?></h2>
                 <p class="text">
                 <!--Pe&ccedil;a um or&ccedil;amento e caso queira nos conhecer pessoalmente podemos agendar uma visita. <br><strong>ATENDEMOS TAMB&Eacute;M AOS DOMINGOS COM HORA MARCADA.</strong>-->
                   <?= $bloco[4]; ?>
                 </p>
               </div>
               <div class="labels">
-                <button class="label experiencia active">Quem Somos</button>
-                <button class="label profissionalismo">Profissionalismo</button>
-                <button class="label variedade">Variedade</button>
-                <button class="label custo-beneficio">Custo-benefício</button>
-                <button class="label atendimento">Atendimento</button>
+                <button class="label experiencia active"><?=$tit[0]; ?></button>
+                <button class="label profissionalismo"><?=$tit[1]; ?></button>
+                <button class="label variedade"><?=$tit[2]; ?></button>
+                <button class="label custo-beneficio"><?=$tit[3]; ?></button>
+                <button class="label atendimento"><?=$tit[4]; ?></button>
               </div>
             </div>
           </div>

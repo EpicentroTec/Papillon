@@ -1,9 +1,16 @@
 <?php
 /*
-$server  = "187.45.196.238";
-$usuario = "papilloneventos1";
+if ($lang == 1) {
+  $server  = "187.45.196.238";
+  $usuario = "papilloneventos1";
+  $banco   = "papilloneventos1";
+}
+else {
+  $server  = "187.45.196.160";
+  $usuario = "papillonevento1";
+  $banco   = "papillonevento1";
+}
 $senha   = "pap14333";
-$banco   = "papilloneventos1";
 */
 $server  = "localhost";
 $usuario = "root";

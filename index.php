@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
   session_start();
   if (isset($_GET['i']) && $_GET['i'] == "eng") {
@@ -9,6 +8,7 @@
     session_destroy();
   $lang = $_SESSION['i'] == 1? 2 : 1;
 ?>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -28,6 +28,7 @@
     <script src="assets/scripts/jquery.cycle2.center.min.js"></script>
     <script src="script.js"></script>
     <script>
+    <!--
       function menudepo() {
         var f = document.getElementById('depo-menu');
         f.style.marginTop = "-40px";
@@ -49,6 +50,7 @@
         var f = document.getElementById('foto_gde');
         f.innerHTML = "<img src='http://www.papilloneventos.com.br/sitenovo/imagens/" + img + "'>";
       }
+    -->
     </script>
   </head>
   <body class="resolucao">
@@ -57,7 +59,7 @@
       <div class="slider slideshow" data-cycle-center-horz="true" data-cycle-center-vert="true">
         <div class="cycle-pager"></div>
         <?php
-					$dir = "abert";// . $qual;//array("vela2", "garcon", "mesas", "vela1", "bolo1", "fotohome", "bolo2", "alianca");
+					$dir = "abert";
 					if (is_dir($dir)) {
 						if ($dh = opendir($dir)) {
 							$i = 0;
@@ -70,13 +72,8 @@
 						echo "<img src=\"" . $dir . "/" . $fotos[$i] . "\"";
 						echo $i == 3? " class=\"slide active\"" : "class=\"slide active\"";
 						echo ">";
-						//$i++;
 					}
 				?>
-        <!--img class="slide active" src="assets/img/01x1900.png">
-        <img class="slide" src="assets/img/02.png">
-        <img class="slide" src="assets/img/03.jpg">
-        <img class="slide" src="assets/img/04.png"-->
       </div>
       <div class="wrap wrap-social">
         <ul class="social-bar">
@@ -98,68 +95,59 @@
         <h1 class="hidden">Menu</h1>
         <div class="wrap">
           <div class="logo">
-            <a href="."><img src="assets/img/logo.png" alt="Logo"></a>
+            <a href="<?= $lang == 1? "." : "?i=eng"; ?>"><img src="assets/img/logo.png" alt="Logo"></a>
           </div>
           <ul>
-          
-          <?php 
-          if (!isset($_SESSION['i'])) {
+            <?php 
+            if ($lang == 1)
+              $tit  = array("Quem somos","Serviços","Casamento na Praia","Orçamento","Mídia","Contato");
+            else
+              $tit  = array("Who we are","Services","Beach Wedding","Online Budget","Multimedia","Contact us");
             ?>
             <li class="menu-icon"><i class="fa fa-bars"></i></li>
-            <li class="menu-item"><a href=".#quemsomos">Quem Somos</a></li>
-            <li class="menu-item"><a href=".#servicos">Serviços</a></li>
-            <li class="menu-item"><a href=".#casamento">Casamento na Praia</a></li>
-            <li class="menu-item"><a href=".#orcamento">Orçamento</a></li>
-            <li class="menu-item"><a href=".#depoimentos">Depoimentos</a></li>
-            <li class="menu-item"><a href=".#midia">Mídia</a></li>
-            <li class="menu-item"><a href=".#contato">Contato</a></li>
-            <?php
-          }
-          else {
+            <li class="menu-item"><a href=".#quemsomos"><?=$tit[0]; ?></a></li>
+            <li class="menu-item"><a href=".#servicos"><?=$tit[1]; ?></a></li>
+            <li class="menu-item"><a href=".#casamento"><?=$tit[2]; ?></a></li>
+            <li class="menu-item"><a href=".#orcamento"><?=$tit[3]; ?></a></li>
+            <?php 
+            if ($lang == 1) {
+              ?>
+              <li class="menu-item"><a href=".#depoimentos">Depoimentos</a></li>
+              <?php 
+            }
             ?>
-            <li class="menu-icon"><i class="fa fa-bars"></i></li>
-            <li class="menu-item"><a href=".#quemsomos">Who we are</a></li>
-            <li class="menu-item"><a href=".#servicos">Services</a></li>
-            <li class="menu-item"><a href=".#casamento">Beach Wedding</a></li>
-            <li class="menu-item"><a href=".#orcamento">Online Budget</a></li>
-            <li class="menu-item"><a href=".#midia">Multimedia</a></li>
-            <li class="menu-item"><a href=".#contato">Contact us</a></li>
-            <?php
-          }
-          ?>
-            <!-- <li class="menu-item destaque"><a href="#">Locação de equipamento</a></li> -->
+            <li class="menu-item"><a href=".#midia"><?=$tit[4]; ?></a></li>
+            <li class="menu-item"><a href=".#contato"><?=$tit[5]; ?></a></li>
           </ul>
         </div>
       </nav>
     </header>
     <main>
-      <?php
-      if ($lang == 1) {
-      ?>
       <section id="locacao" class="locacao">
         <div class="wrap">
-          <h1 class="hidden">Locação de materiais</h1>
-          <p>Veja também: 
-          <a href="?pag=124">Locação de materiais</a> | 
-          <a href="?pag=noivos">Página dos noivos</a></p>
-          
+          <?php
+          if ($lang == 1) {
+          ?>
+            <h1 class="hidden">Locação de materiais</h1>
+            <p>Veja também: 
+            <a href="?pag=124">Locação de materiais</a> | 
+            <a href="noivos.php">Página dos noivos</a></p>          
+          <?php
+          }
+          else
+            echo "<p>&nbsp;</p>";
+          ?>
         </div>
       </section>
-      <?php
-      }
-      ?>
       
       <section id="conteudo"></section>
       <?php
-      if ($lang == 1) {
-        $tit = array("Quem somos","Profissionalismo","Variedade","Custo-Benefício","Atendimento");
-        include ("conexao.php");
-      }
-      else {
-        $tit = array("Who we are","Professionalism","Variety","Cost-effectiveness","Customer service");
-        include ("conexao2.php");
-      }
+      if ($lang == 1)
+        $tit2 = array("Quem somos","Profissionalismo","Variedade","Custo-Benefício","Atendimento");
+      else
+        $tit2 = array("Who we are","Professionalism","Variety","Cost-effectiveness","Customer service");
       
+      include ("conexao.php");
       
       if (!isset($_GET['pag'])) {
         ?>
@@ -178,46 +166,41 @@
           <div class="wrap">
             <div class="painel clearfix">
               <div class="content experiencia visible">
-                <h2 class="title"><?=$tit[0]; ?></h2>
+                <h2 class="title"><?=$tit2[0]; ?></h2>
                 <p class="text">
-                <!--Trabalhamos h&aacute; mais de dez anos com casamentos na praia, adquirindo neste per&iacute;odo experi&ecirc;ncia para prestar todos os servi&aacute;os com profissionalismo, oferecendo aos noivos seguran&ccedil;a em todo o planejamento do casamento. Temos servi&ccedil;o pr&oacute;prio de buffet, decora&ccedil;&atilde;o, bar de caipirinhas e espa&ccedil;os p&eacute; na areia. Para todos os outros como DJ, fotografia, filmagem, convites, temos parceria com profissionais da &aacute;rea. Desta forma, oferecemos praticidade aos noivos j&aacute; que, em sua maioria, s&atilde;o de fora da cidade.-->
                   <?= $bloco[0]; ?>
                 </p>
               </div>
               <div class="content profissionalismo">
-                <h2 class="title"><?=$tit[1]; ?></h2>
+                <h2 class="title"><?=$tit2[1]; ?></h2>
                 <p class="text">
-                <!--O Papillon Eventos trabalha com profissionalismo, dedica&ccedil;&atilde;o, al&eacute;m de ter muito prazer em poder realizar seus sonhos, projetos e ideias. Eventos sociais, cerim&ocirc;nias, festas, onde o calor do encontro familiar e afetivo se juntam. Trabalhamos junto a emo&ccedil;&otilde;es, que geram uma energia especial, energia esta que nos d&aacute; inspira&ccedil;&atilde;o para realizar cada vez melhor nosso trabalho.-->
                   <?= $bloco[1]; ?>
                 </p>
               </div>
               <div class="content variedade">
-                <h2 class="title"><?=$tit[2]; ?></h2>
+                <h2 class="title"><?=$tit2[2]; ?></h2>
                 <p class="text">
-                <!--Al&eacute;m dos servi&ccedil; do segmento de festas, promovemos tamb&eacute;m eventos institucionais, servi&ccedil;os prestados &agrave;s empresas. Em todos os tipos de eventos, somos objetivos e pr&aacute;ticos, oferecendo ideias e solu&ccedil;&otilde;es para as mais variadas necessidades. Com card&aacute;pios diversificados e criativos nas op&ccedil;&otilde;es de <em>coffee break</em>, caf&eacute; da manh&atilde;, <em>happy hour</em>, <em>catering </em>ou qualquer outro tipo de recep&ccedil;&atilde;o.-->
                   <?= $bloco[2]; ?>
                 </p>
               </div>
               <div class="content custo-beneficio">
-                <h2 class="title"><?=$tit[3]; ?></h2>
+                <h2 class="title"><?=$tit2[3]; ?></h2>
                 <p class="text">
-                <!--Como oferecemos todos os servi&ccedil;os num pacote &uacute;nico e prestamos uma assessoria completa sem custo adicional o custo-benef&iacute;cio se torna muito vi&aacute;vel. Parcerias e indica&ccedil;&otilde;es de profissionais para os mais diversos servi&ccedil;os e produtos facilitam ainda mais a vida de nossos clientes, familiares e seus convidados.-->
                   <?= $bloco[3]; ?>
                 </p>
               </div>
               <div class="content atendimento">
-                <h2 class="title"><?=$tit[4]; ?></h2>
+                <h2 class="title"><?=$tit2[4]; ?></h2>
                 <p class="text">
-                <!--Pe&ccedil;a um or&ccedil;amento e caso queira nos conhecer pessoalmente podemos agendar uma visita. <br><strong>ATENDEMOS TAMB&Eacute;M AOS DOMINGOS COM HORA MARCADA.</strong>-->
                   <?= $bloco[4]; ?>
                 </p>
               </div>
               <div class="labels">
-                <button class="label experiencia active"><?=$tit[0]; ?></button>
-                <button class="label profissionalismo"><?=$tit[1]; ?></button>
-                <button class="label variedade"><?=$tit[2]; ?></button>
-                <button class="label custo-beneficio"><?=$tit[3]; ?></button>
-                <button class="label atendimento"><?=$tit[4]; ?></button>
+                <button class="label experiencia active"><?=$tit2[0]; ?></button>
+                <button class="label profissionalismo"><?=$tit2[1]; ?></button>
+                <button class="label variedade"><?=$tit2[2]; ?></button>
+                <button class="label custo-beneficio"><?=$tit2[3]; ?></button>
+                <button class="label atendimento"><?=$tit2[4]; ?></button>
               </div>
             </div>
           </div>
@@ -234,13 +217,17 @@
             $texto = str_replace("<p>&nbsp;</p><p>&nbsp;</p>", "", $txt['texto']);
             $bloco = explode("<!-- -->", $texto);
 
+            if ($lang == 1)
+              $tit2 = array("Buffet","Decoração","Espaço Pé na Areia","Open bar de caipirinha","Assessoria");
+            else
+              $tit2 = array("Buffet","Decoration","On the Beach Space","Caipirinha's Open Bar","Advice");
             ?>
-            <h1>Serviços</h1>
+            <h1><?=$tit[1]; ?></h1>
             <div class="box-content clearfix">
-              <button class="btn buffet active"><span class="title">Buffet</span></button>
+              <button class="btn buffet active"><span class="title"><?=$tit2[0]; ?></span></button>
               <div class="card buffet visible ">
                 <div class="text">
-                  <h2>Buffet</h2>
+                  <h2><?=$tit2[0]; ?></h2>
                   <p>
                   <!--Temos uma variedade de cardápios exclusivos como por exemplo; Coquetéis, Crepes, Mesas de frios, jantar, cardápio típico praiano e outros.</p>
                   <p>Já oferecemos dentro dos serviços de buffet;<br>
@@ -254,10 +241,10 @@
                   <img src="assets/img/buffet-bg.jpg">
                 </div>
               </div>
-              <button class="btn decoracao"><span class="title">Decoração</span></button>
+              <button class="btn decoracao"><span class="title"><?=$tit2[1]; ?></span></button>
               <div class="card decoracao">
                 <div class="text">
-                  <h2>Decoração</h2>
+                  <h2><?=$tit2[1]; ?></h2>
                   <p>
                   <!--Produzimos todos os arranjos de flores da cerimônia e da festa com criatividade e bom gosto sempre priorizando o estilo e preferência dos noivos.</p>
                   <p>Podemos também confeccionar o buquê, coroa e colar de flores, que dão um toque de charme nas cerimônias à beira mar.-->
@@ -268,10 +255,10 @@
                   <img src="assets/img/decoracao-bg.jpg">
                 </div>
               </div>
-              <button class="btn areia"><span class="title">Espaço Pé na Areia</span></button>
+              <button class="btn areia"><span class="title"><?=$tit2[2]; ?></span></button>
               <div class="card areia">
                 <div class="text">
-                  <h2>Espaço Pé na Areia</h2>
+                  <h2><?=$tit2[2]; ?></h2>
                   <p>
                   <!--Oferecemos dois espaços adequados a realização do casamento na praia. Com estrutura coberta, cozinha, banheiros, estacionamento...</p>
                   <p>Nos dois casos as praias são tranquilas, o que é muito importante para que a cerimônia aconteça sem interferências ou tumultos.-->
@@ -282,10 +269,10 @@
                   <img src="assets/img/areia-bg.jpg">
                 </div>
               </div>
-              <button class="btn openbar"><span class="title">Open bar de caipirinha</span></button>
+              <button class="btn openbar"><span class="title"><?=$tit2[3]; ?></span></button>
               <div class="card openbar">
                 <div class="text">
-                  <h2>Open bar de caipirinha</h2>
+                  <h2><?=$tit2[3]; ?></h2>
                   <p>
                   <!--Uma opção diferenciada para servir um drink.</p>
                   <p>Um bar bem decorado servindo caipirinhas de frutas. O convidado poderá criar seu próprio drink escolhendo os ingredientes (Bebidas: vodka, Rum, Saquê e Cachaça e Frutas variadas).-->
@@ -296,10 +283,10 @@
                   <img src="assets/img/caipira-bg.jpg">
                 </div>
               </div>
-              <button class="btn assessoria"><span class="title">Assessoria</span></button>
+              <button class="btn assessoria"><span class="title"><?=$tit2[4]; ?></span></button>
               <div class="card assessoria">
                 <div class="text">
-                  <h2>Assessoria</h2>
+                  <h2><?=$tit2[4]; ?></h2>
                   <p>
                   <!--<b>Este serviço oferecemos como cortesia.</b></p>
                   <p>Desde o primeiro momento nossos noivos recebem um chek list com orientações sobre todas as decisões a respeito da organização do casamento ao qual faremos um acompanhamento com idéias , esclarecimentos e sugestões.</p>
@@ -313,7 +300,20 @@
               </div>
             </div>
             <div class="veja-mais clearfix">
-              <p><span class="text">Estaremos sempre a disposição para orientar e esclarecer qualquer detalhe a respeito do evento.</span><!-- <span class="link">Veja mais: <a href="#">Locação de materiais</a></span> --></p>
+              <p><span class="text">
+                <?php
+                if ($lang == 1) {
+                  ?>
+                  Estaremos sempre a disposição para orientar e esclarecer qualquer detalhe a respeito do evento.
+                  <?php
+                }
+                else {
+                  ?>
+                  We will always be on hand to guide and clarify any details about the event.
+                  <?php
+                }
+                ?>
+              </span><!-- <span class="link">Veja mais: <a href="#">Locação de materiais</a></span> --></p>
             </div>
           </div>
         </section>
@@ -368,83 +368,89 @@
           </section>
           <?php
         }  
+        if ($lang == 1)
+          $rot = array("Insira seu nome","Insira seu e-mail","Telefone","Celular","Cidade","Tipo de evento","Data do evento","Número de pessoas","Observações","Onde conheceu a Papillon","Enviar");
+        else
+          $rot = array("Insert your name","Insert your e-mail","Telephone","Mobile","City","Event type","Date","Quantity people","Message","Where did you know Papillon","Send");          
         ?>
         <section id="orcamento" class="orcamento">
           <div class="wrap">
-            <h1>Orçamento Online</h1>
+            <h1><?=$tit[3]; ?></h1>
             <form action="." method="post">
               <table>
                 <tr>
                   <td colspan="3">
-                    <input required type="text" name="nome" placeholder="Insira seu nome*">
+                    <input required type="text" name="nome" placeholder="<?=$rot[0]; ?>*">
                   </td>
                   <td colspan="3">
-                    <input required type="email" name="email" placeholder="Insira seu email*">
+                    <input required type="email" name="email" placeholder="<?=$rot[1]; ?>*">
                   </td>
                 </tr>
                 <tr>
                   <td class="mobile-adaptacao">
-                    <label for="telefone">Telefone:*</label>
+                    <label for="telefone"><?=$rot[2]; ?>:*</label>
                   </td>
                   <td class="mobile-adaptacao">
                     <input required type="text" name="telefone">
                   </td>
                   <td class="mobile-adaptacao">
-                    <label for="celular">Celular:*</label>
+                    <label for="celular"><?=$rot[3]; ?>:*</label>
                   </td>
                   <td class="mobile-adaptacao">
                     <input required type="text" name="celular">
                   </td>
                   <td>
-                    <input required type="text" name="cidade" placeholder="Cidade*">
+                    <input required type="text" name="cidade" placeholder="<?=$rot[4]; ?>*">
                   </td>
                 </tr>
                 <tr>
                   <td class="mobile-adaptacao">
-                    <label for="tipoevento">Tipo de Evento:*</label>
+                    <label for="tipoevento"><?=$rot[5]; ?>:*</label>
                   </td>
                   <td colspan="2" class="mobile-adaptacao">
                     <select required name="tipoevento">
-                      <option value="0">Escolha o tipo</option>
-                      <option value="1">Aniversário</option>
-                      <option value="2">Bodas</option>
-                      <option value="3">Casamento na praia</option>
-                      <option value="4">Casamento tradicional</option>
-                      <option value="5">Formatura</option>
-                      <option value="6">Festa infantil</option>
-                      <option value="7">Confraternização</option>
-                      <option value="8">Locação de material</option>
+                      <?php
+                      if ($lang == 1)
+                        $opt = array("Escolha o tipo","Aniversário","Bodas","Casamento na praia","Casamento tradicional","Formatura","Festa infantil","Confraternização","Observações","Locação de material");
+                      else
+                        $opt = array("Choose the type","Birthday","Marriage","Beach Wedding","Traditional Wedding","Graduation","Children Party","Fraternization","Message","Equipment rental");
+                      
+                      for ($i = 0; $i <= 9; $i++)
+                        echo "<option value=\"" . $i . "\">" . $opt[$i] . "</option>";
+                      ?>
                     </select>
                   </td>
                   <td class="mobile-adaptacao">
-                    <input required type="date" name="dataevento" placeholder="Data do evento*">
+                    <input required type="date" name="dataevento" placeholder="<?=$rot[6]; ?>*">
                   </td>
                   <td class="mobile-adaptacao">
-                    <input required type="text" name="numeropessoas" placeholder="Número de pessoas*">
+                    <input required type="text" name="numeropessoas" placeholder="<?=$rot[7]; ?>*">
                   </td>
                 </tr>
                 <tr>
                   <td colspan="5">
-                    <textarea name="observacoes" placeholder="Observações"></textarea>
+                    <textarea name="observacoes" placeholder="<?=$rot[8]; ?>"></textarea>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <span>Onde Conheceu a Papillon Eventos?</span>
+                    <span><?=$rot[9]; ?>?</span>
                   </td>
                   <td colspan="2">
                     <select name="onde">
-                      <option value="">Escolha a opção</option>
-                      <option value="Revista">Revista</option>
-                      <option value="Site de busca">Site de busca</option>
-                      <option value="Panfleto">Panfleto</option>
-                      <option value="Amigos">Amigos</option>
-                      <option value="Parentes">Parentes</option>
-                      <option value="Outra">Outra</option>
+                      <?php
+                      if ($lang == 1)
+                        $opt = array("Escolha a opção","Revista","Site de Busca","Panfleto","Amigos","Outro");
+                      else
+                        $opt = array("Choose...","Magazine","Search engine","Flyer","Friends","Other");
+                      
+                      for ($i = 0; $i <= 6; $i++)
+                        echo "<option value=\"" . $i . "\">" . $opt[$i] . "</option>";
+                      ?>
                     </select>
                   </td>
                   <td>
-                    <button type="submit" name="enviar" class="btn confirma">Enviar</button>
+                    <button type="submit" name="enviar" class="btn confirma"><?=$rot[10]; ?></button>
                   </td>
                 </tr>
               </table>
@@ -462,26 +468,49 @@
     <footer class="footer">
       <section id="contato" class="contato">
         <div class="navbar top">
-          <h1 class="hidden">Contatos</h1>
-          <div class="wrap">
-            <span class="item"><strong>Endereço</strong>: Rua Jordão H. da Costa, 179 Centro - Ubatuba, SP</span>
-            <span class="item"><strong>Telefones</strong>: (12) 3833-9011 / 7813-6456</span>
+          <h1 class="hidden"><?=$tit[5]; ?></h1>
+          <div class="wrap"><center>
+            <span class="item">Rua Jordão Homem da Costa, 179 - Centro - Ubatuba, SP</span>
+            <span class="item">(12) 3833-9011 / 7813-6456</span>
             <span class="item">
-              <strong>Redes sociais:</strong>
               <a href="http://www.facebook.com/profile.php?id=1746417399#!/profile.php?id=1746417399"><i class="fa fa-facebook-square"></i></a>
               <a href="http://twitter.com/#!/papillonbuffet"><i class="fa fa-twitter-square"></i></a>
               <a href="http://www.flickr.com/photos/31374899@N03/5110850805/"><i class="fa fa-flickr"></i></a>
-              <a href="http://casamentonapraiapapillon.blogspot.com/"><img class="fa" src="assets/img/i-blog.png" alt="Ícone do blog da Papillon"></a>
-              
+              <a href="http://casamentonapraiapapillon.blogspot.com/"><img class="fa" src="assets/img/i-blog.png" alt="Ícone do blog da Papillon"></a>  
             </span>
+            </center>
+            
             <p align="center">
-            Entre em contato ou solicite um orçamento online. <a href=".#orcamento">Clique aqui</a>!
+              <?php
+              if ($lang == 1) {
+                ?>
+                Entre em contato ou solicite um orçamento online. <a href=".#orcamento">Clique aqui</a>!
+                <?php
+              }
+              else {
+                ?>
+                Contact us or ask for an online budget. <a href=".#orcamento">Click here</a>!
+                <?php
+              }
+              ?>
             </p>
           </div>
         </div>
         <div class="navbar bottom">
-          <span class="item"><strong>Papillon Buffet e Eventos</strong> 2015 © Todos os direitos reservados</span>
+        <?php
+        if ($lang == 1) {
+          ?>
+          <span class="item"><strong>Papillon Buffet e Eventos</strong> 2016 © Todos os direitos reservados</span>
           <span class="item">Desenvolvido por <a href="epicentro.net.br" target="_blank">Epicentro Tecnologia</a></span>
+          <?php
+        }
+        else {
+          ?>
+          <span class="item"><strong>Papillon Buffet e Eventos</strong> 2016 © All rights reserved</span>
+          <span class="item">Powered by <a href="epicentro.net.br" target="_blank">Epicentro Tecnologia</a></span>
+          <?php
+        }
+        ?>
         </div>
       </section>
     </footer>
